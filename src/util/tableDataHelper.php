@@ -55,6 +55,20 @@ class tableDataHelper
     }
 
     /**
+     * Returns a string with the string data in each line.
+     * @param array $map
+     * @return string
+     */
+    public static function arrayToString(array $list): string
+    {
+        $result = '';
+        foreach ($list as $nr => $row) {
+            $result .= $row.PHP_EOL;
+        }
+        return $result;
+    }
+
+    /**
      * Returns as a string the sequence of values separated by a separator.
      * @param array $sequence
      * @param string $separator

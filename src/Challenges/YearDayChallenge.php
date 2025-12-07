@@ -7,11 +7,14 @@ use App\util\tableDataHelper;
 
 class YearDayChallenge implements ChallengeInterface
 {
-    private int $half = 0;
-    private string $dataPath;
-    private array $data = [];
-    private array $error = [];
-    private string $result = '';
+    protected string $half = '1';
+    protected string $test = '1';
+    protected string $dataPath;
+    protected string $dataStr = '';
+    protected array $data = [];
+    protected array $error = [];
+    protected string $result = '';
+    protected string $format;
 
     public function __construct(
         private readonly int $year,
@@ -25,11 +28,10 @@ class YearDayChallenge implements ChallengeInterface
 
     private function executePart1(): void {    }
     private function executePart2(): void {    }
-    private function executeTestPart(): void {    }
-
-    public function execute(string $half): string
+    public function execute(string $half, ?string $test='1'): string
     {
         $this->half = $half;
+        $this->test = $test;
 
         try {
             $this->getData();
@@ -44,9 +46,6 @@ class YearDayChallenge implements ChallengeInterface
                     break;
                 case '2':
                     $this->executePart2();
-                    break;
-                case 'test':
-                    $this->executeTestPart();
                     break;
             }
         } catch (\Throwable $th) {
@@ -65,18 +64,47 @@ class YearDayChallenge implements ChallengeInterface
 
     public function getData(): void
     {
-        $this->dataPath = $this->projectDir.'/src/Challenges/data/'.$this->year.'/day'.$this->day.'-'.$this->half.'.txt';
+        $this->dataPath = $this->projectDir.'/src/Challenges/data/'.$this->year.'/day'.$this->day.'H'.$this->half.'T'.$this->test.'.txt';
         if (!file_exists($this->dataPath)) {
             Throw new \Exception('No puedo cargar los datos porque el archivo no existe: '.$this->dataPath);
         }
         if ($this->debug) {
             echo '**** Cargando datos del archivo: '.$this->dataPath.PHP_EOL;
         }
-        $this->data = fileDataHelper::fileToArrayByLineAndCol($this->dataPath);
-        if ($this->debug) {
-            echo '**INI**'.PHP_EOL;
-            echo tableDataHelper::mapToString($this->data);
-            echo '**END**'.PHP_EOL;
+        switch ($this->format) {
+            case fileDataHelper::DATA_FORMAT_LINES:
+                $this->data = fileDataHelper::fileToArrayByLine($this->dataPath);
+                if ($this->debug) {
+                    echo '**INI**'.PHP_EOL;
+                    echo tableDataHelper::arrayToString($this->data);
+                    echo '**END**'.PHP_EOL;
+                }
+                break;
+            case fileDataHelper::DATA_FORMAT_COLS:
+                $this->data = fileDataHelper::fileToArrayByLineAndCol($this->dataPath);
+                if ($this->debug) {
+                    echo '**INI**'.PHP_EOL;
+                    echo tableDataHelper::mapToString($this->data);
+                    echo '**END**'.PHP_EOL;
+                }
+                break;
+            case fileDataHelper::DATA_FORMAT_CHARS:
+                $this->data = fileDataHelper::fileToArrayByLineAndChar($this->dataPath);
+                if ($this->debug) {
+                    echo '**INI**'.PHP_EOL;
+                    echo tableDataHelper::mapToString($this->data);
+                    echo '**END**'.PHP_EOL;
+                }
+                break;
+            case fileDataHelper::DATA_FORMAT_STRING:
+            default:
+                $this->dataStr = fileDataHelper::fileToString($this->dataPath);
+            if ($this->debug) {
+                echo '**INI**'.PHP_EOL;
+                echo $this->dataStr;
+                echo '**END**'.PHP_EOL;
+            }
+            break;
         }
     }
 

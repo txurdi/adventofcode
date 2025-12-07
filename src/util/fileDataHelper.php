@@ -4,6 +4,10 @@ namespace App\util;
 
 class fileDataHelper
 {
+    public const DATA_FORMAT_STRING = 1;
+    public const DATA_FORMAT_LINES = 1;
+    public const DATA_FORMAT_COLS = 2;
+    public const DATA_FORMAT_CHARS = 3;
     /**
      * Return the content of a file as a string
      * @param string $filePath

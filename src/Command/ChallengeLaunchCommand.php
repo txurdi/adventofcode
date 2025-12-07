@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
     name: 'txurdi:challenge-launch',
     description: 'Launch a day challenge.',
     help: 'Launch a day challenge.',)]
-class TwentyTwentyFiveChallengeLaunchCommand extends Command
+class ChallengeLaunchCommand extends Command
 {
     private SymfonyStyle $io;
     private string $projectDir;
@@ -43,6 +43,7 @@ class TwentyTwentyFiveChallengeLaunchCommand extends Command
         #[Argument('Year')] string $year,
         #[Argument('Day')] string $day,
         #[Argument('Half')] string $half,
+        #[Argument('Test')] string $test = '1',
         #[Argument('Debug')] string $debug = 'false',
     ): int
     {
@@ -50,13 +51,14 @@ class TwentyTwentyFiveChallengeLaunchCommand extends Command
         $this->io->writeln('Year: '.$year);
         $this->io->writeln('Day: '.$day);
         $this->io->writeln('Half: '.$half);
+        $this->io->writeln('Test: '.$test);
         $this->io->writeln('Debug: '.$debug);
 
         $startedAt = microtime(true);
 
         try {
             $challenge = $this->challengeFactory->createChallenge($year, $day, $this->projectDir, $debug);
-            $result = $challenge->execute($half);
+            $result = $challenge->execute($half, $test);
         } catch (\Throwable $error) {
             $this->io->error($error);
             return Command::FAILURE;
