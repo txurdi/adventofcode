@@ -1,0 +1,28 @@
+{
+    "nombre": "RUTA_INSPECCIONABLE",
+    "num_ficheros": 0,
+    "num_directorios": 2,
+    "num_media": 0,
+    "num_error": 0,
+    "directorios": [
+        {
+            "nombre": "otras cosas",
+            "num_ficheros": 10,
+            "num_directorios": 0,
+            "num_media": 10,
+            "num_error": 0,
+            "directorios": [],
+            "errores": []
+        },
+        {
+            "nombre": "cosas",
+            "num_ficheros": 8,
+            "num_directorios": 0,
+            "num_media": 8,
+            "num_error": 0,
+            "directorios": [],
+            "errores": []
+        }
+    ],
+    "errores": []
+}
