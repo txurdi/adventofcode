@@ -2,20 +2,13 @@
 namespace App\Command;
 
 use App\Challenges\ChallengeFactory;
-use App\Entity\Media;
-use Doctrine\ORM\EntityManagerInterface;
-use FFMpeg\FFProbe;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\Process\Process;
 
 #[AsCommand(
     name: 'txurdi:challenge-launch',
@@ -59,10 +52,8 @@ class TwentyTwentyFiveChallengeLaunchCommand extends Command
         $this->io->writeln('Half: '.$half);
         $this->io->writeln('Debug: '.$debug);
 
-
         $startedAt = microtime(true);
 
-//        $result = $this->projectDir;
         try {
             $challenge = $this->challengeFactory->createChallenge($year, $day, $this->projectDir, $debug);
             $result = $challenge->execute($half);
