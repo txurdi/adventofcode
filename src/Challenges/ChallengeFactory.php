@@ -10,7 +10,7 @@ class ChallengeFactory
      * @return ChallengeInterface
      * @throws \InvalidArgumentException si no se encuentra la estrategia.
      */
-    public function createChallenge(string $year, string $day, string $path): ChallengeInterface
+    public function createChallenge(string $year, string $day, string $path, ?bool $debug = false): ChallengeInterface
     {
         $challengeClass = "App\\Challenges\\Year{$year}Day{$day}Challenge";
 
@@ -19,6 +19,6 @@ class ChallengeFactory
             throw new \InvalidArgumentException("No se encontró el reto para el año $year y día $day.");
         }
 
-        return new $challengeClass($path);
+        return new $challengeClass($year, $day, $path, $debug);
     }
 }

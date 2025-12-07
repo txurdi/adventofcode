@@ -47,18 +47,24 @@ class TwentyTwentyFiveChallengeLaunchCommand extends Command
 
 
     public function __invoke(
-        #[Argument('Year')] string $year, #[Argument('Day')] string $day, #[Argument('Half')] string $half, OutputInterface $output
+        #[Argument('Year')] string $year,
+        #[Argument('Day')] string $day,
+        #[Argument('Half')] string $half,
+        #[Argument('Debug')] string $debug = 'false',
     ): int
     {
         $result = '???';
+        $this->io->writeln('Year: '.$year);
         $this->io->writeln('Day: '.$day);
         $this->io->writeln('Half: '.$half);
+        $this->io->writeln('Debug: '.$debug);
+
 
         $startedAt = microtime(true);
 
 //        $result = $this->projectDir;
         try {
-            $challenge = $this->challengeFactory->createChallenge($year, $day, $this->projectDir);
+            $challenge = $this->challengeFactory->createChallenge($year, $day, $this->projectDir, $debug);
             $result = $challenge->execute($half);
         } catch (\Throwable $error) {
             $this->io->error($error);
