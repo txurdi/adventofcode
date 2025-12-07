@@ -5,7 +5,7 @@ namespace App\Challenges;
 use App\util\fileDataHelper;
 use App\util\tableDataHelper;
 
-class YearDayChallenge implements ChallengeInterface
+abstract class YearDayChallenge implements ChallengeInterface
 {
     protected string $half = '1';
     protected string $test = '1';
@@ -26,8 +26,8 @@ class YearDayChallenge implements ChallengeInterface
 
     }
 
-    private function executePart1(): void {    }
-    private function executePart2(): void {    }
+    abstract protected function executePart1(): void;
+    abstract protected function executePart2(): void;
     public function execute(string $half, ?string $test='1'): string
     {
         $this->half = $half;

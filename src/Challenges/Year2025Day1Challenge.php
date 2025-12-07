@@ -81,13 +81,28 @@ class Year2025Day1Challenge extends YearDayChallenge
         return parent::execute($half, $test);
     }
 
-    private function executePart1(): void
+    protected function executePart1(): void
     {
-
-
-
+        $numberOfZeros = 0;
+        $position = 50;
+        foreach ($this->data as $line) {
+            $direction = substr($line, 0, 1);
+            $distance = substr($line, 1);
+            if ($direction == 'L') {
+                $distance *= -1;
+            }
+            $position += $distance;
+            $position %= 100;
+            if ($position < 0) {
+                $position += 100;
+            } else if ($position == 0) {
+                $numberOfZeros ++;
+            }
+        }
+        $this->result = $numberOfZeros;
     }
-    private function executePart2(): void
+
+    protected function executePart2(): void
     {
 
 

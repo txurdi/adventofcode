@@ -31,7 +31,10 @@ class fileDataHelper
         $numLine = 1;
         while(! feof($arc))  {
             if ($maxLine && ($numLine > $maxLine)) break;
-            $result[$numLine] = fgets($arc);
+            $line = fgets($arc);
+            if (!empty($line)) {
+                $result[$numLine] = $line;
+            }
             $numLine++;
         }
         fclose($arc);
