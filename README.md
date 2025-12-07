@@ -1,8 +1,8 @@
 # Apuntes de Txurdi
 
-Más abajo el readme oficial de Dunglas
+(Más abajo el readme oficial de Dunglas)
 
-Entrar en Mountain:
+Entrar cada uno donde tenga la app:
 `cd /media/txurdi/DISCO/CODE/challenges/adventofcode`
 
 Iniciar el docker:
@@ -13,6 +13,7 @@ Parar el docker:
 
 Si ha habido cambios gordos en el docker:
 `docker compose down --remove-orphans && docker compose build --pull --no-cache`
+
 
 # Symfony Docker
 
