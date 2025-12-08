@@ -45,6 +45,29 @@ class Year2025Day1Challenge extends YearDayChallenge
 
     protected function executePart2(): void
     {
-
+        $numberOfZeros = 0;
+        $position = 50;
+        foreach ($this->data as $line) {
+            $direction = substr($line, 0, 1);
+            $distance = (int)substr($line, 1);
+            if ($direction == 'L') {
+                $distance *= -1;
+            }
+            $position += $distance;
+            if (($position == 0) || ($position == 100)) {
+                $numberOfZeros ++;
+                $position = 0;
+            } else {
+                $numberOfZeros += ((int)($position / 100));
+                $position %= 100;
+                if ($position < 0) {
+                    if ($distance != $position) {
+                        $numberOfZeros++;
+                    }
+                    $position += 100;
+                }
+            }
+        }
+        $this->result = $numberOfZeros;
     }
 }

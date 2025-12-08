@@ -44,7 +44,7 @@ class ChallengeLaunchCommand extends Command
         #[Argument('Day')] string $day,
         #[Argument('Half')] string $half,
         #[Argument('Test')] string $test = '1',
-        #[Argument('Debug')] string $debug = 'false',
+        #[Argument('Debug')] bool $debug = false,
     ): int
     {
         $result = '???';
