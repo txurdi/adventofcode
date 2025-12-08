@@ -50,20 +50,20 @@ class Year2025Day1Challenge extends YearDayChallenge
         foreach ($this->data as $line) {
             $direction = substr($line, 0, 1);
             $distance = (int)substr($line, 1);
-            if ($direction == 'L') {
-                $distance *= -1;
-            }
             $extraRotations = (int)($distance / 100);
             $numberOfZeros += abs($extraRotations);
             $realDistance = $distance % 100;
+            if ($direction == 'L') {
+                $realDistance *= -1;
+            }
             $position += $realDistance;
             if (($position == 0) && ($realDistance != 0)) {
                 $numberOfZeros ++;
             } elseif ($position < 0) {
-                if ($position != $distance) $numberOfZeros++;
+                if (abs($position) != abs($distance)) $numberOfZeros++;
                 $position += 100;
             } elseif ($position >= 100) {
-                if ($position != $distance) $numberOfZeros++;
+                if (abs($position) != abs($distance)) $numberOfZeros++;
                 $position -= 100;
             }
         }
