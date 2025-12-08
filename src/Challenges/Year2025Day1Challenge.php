@@ -53,19 +53,18 @@ class Year2025Day1Challenge extends YearDayChallenge
             if ($direction == 'L') {
                 $distance *= -1;
             }
-            $position += $distance;
-            if (($position == 0) || ($position == 100)) {
+            $extraRotations = (int)($distance / 100);
+            $numberOfZeros += abs($extraRotations);
+            $realDistance = $distance % 100;
+            $position += $realDistance;
+            if (($position == 0) && ($realDistance != 0)) {
                 $numberOfZeros ++;
-                $position = 0;
-            } else {
-                $numberOfZeros += ((int)($position / 100));
-                $position %= 100;
-                if ($position < 0) {
-                    if ($distance != $position) {
-                        $numberOfZeros++;
-                    }
-                    $position += 100;
-                }
+            } elseif ($position < 0) {
+                if ($position != $distance) $numberOfZeros++;
+                $position += 100;
+            } elseif ($position >= 100) {
+                if ($position != $distance) $numberOfZeros++;
+                $position -= 100;
             }
         }
         $this->result = $numberOfZeros;
