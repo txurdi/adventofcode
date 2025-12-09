@@ -48,6 +48,7 @@ class Year2025Day1Challenge extends YearDayChallenge
         $pointToZero = 0;
         $position = 50;
         foreach ($this->data as $line) {
+            if ((empty($line)) || ($line == PHP_EOL)) continue;
             $direction = substr($line, 0, 1);
             $distance = (int)substr($line, 1);
             $extraRotations = (int)($distance / 100);
@@ -63,11 +64,6 @@ class Year2025Day1Challenge extends YearDayChallenge
         }
         $this->result = $pointToZero;
     }
-    // 7222
-    // 6790
-    // 7742
-    // 6671
-
 
     private function pointsToZero(int $position, int $distance): array
     {
@@ -78,7 +74,9 @@ class Year2025Day1Challenge extends YearDayChallenge
             $pointsToZero++;
         } else if ($newPosition < 0) {
             $newPosition += 100;
-            $pointsToZero++;
+            if ($position != 0) {
+                $pointsToZero++;
+            }
         } else if ($newPosition == 0) {
             if ($position != 0) {
                 $pointsToZero++;
@@ -86,22 +84,4 @@ class Year2025Day1Challenge extends YearDayChallenge
         }
         return [$pointsToZero, $newPosition];
     }
-
-//    private function pointsToZero(int $position, int $distance): array
-//    {
-//        $pointsToZero = 0;
-//        $newPosition = $position + $distance;
-//        if ($newPosition == 0) {
-//            $pointsToZero ++;
-//        } elseif ($newPosition < 0) {
-////                if (abs($position) != abs($distance))
-//            $pointsToZero++;
-//            $newPosition += 100;
-//        } elseif ($newPosition >= 100) {
-//            if (abs($newPosition) != abs($distance)) $pointsToZero++;
-//            $newPosition -= 100;
-//        }
-//
-//        return [$pointsToZero, $newPosition];
-//    }
 }
