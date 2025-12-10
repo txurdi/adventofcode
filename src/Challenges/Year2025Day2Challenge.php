@@ -16,17 +16,17 @@ class Year2025Day2Challenge extends YearDayChallenge
         parent::__construct($year, $day, $projectDir, $debug);
     }
 
-    public function execute(string $half, ?string $test='1', ?string $format='1'): string
+    public function execute(string $half, ?string $test='1', ?string $format=fileDataHelper::DATA_FORMAT_STRING): string
     {
         return parent::execute($half, $test, fileDataHelper::DATA_FORMAT_STRING);
     }
 
     protected function executePart1(): void
     {
-        parent::
         $result = trim($this->dataStr);
 
-        var_dump($result);exit();
+        var_dump($result);
+        exit();
 //        $result[$numLine] = preg_split("/[\s,]+/", (trim($linea)));
 
         $this->result = 0;
