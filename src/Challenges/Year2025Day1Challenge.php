@@ -16,7 +16,7 @@ class Year2025Day1Challenge extends YearDayChallenge
         parent::__construct($year, $day, $projectDir, $debug);
     }
 
-    public function execute(string $half, ?string $test='1'): string
+    public function execute(string $half, ?string $test='1', ?string $format='1'): string
     {
         $this->format = fileDataHelper::DATA_FORMAT_LINES;
         return parent::execute($half, $test);
