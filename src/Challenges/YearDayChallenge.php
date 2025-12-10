@@ -28,10 +28,11 @@ abstract class YearDayChallenge implements ChallengeInterface
 
     abstract protected function executePart1(): void;
     abstract protected function executePart2(): void;
-    public function execute(string $half, ?string $test='1'): string
+    public function execute(string $half, ?string $test='1', ?string $format='1'): string
     {
         $this->half = $half;
         $this->test = $test;
+        $this->format = $format;
 
         try {
             $this->getData();
