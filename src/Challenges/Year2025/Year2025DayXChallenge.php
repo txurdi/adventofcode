@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Challenges;
+namespace App\Challenges\Year2025;
 
+use App\Challenges\YearDayChallenge;
 // use App\util\fileDataHelper;
 
 class Year2025DayXChallenge extends YearDayChallenge

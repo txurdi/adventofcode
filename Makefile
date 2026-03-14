@@ -26,11 +26,13 @@ debug:
 ## Crear fichero para un nuevo reto: make new DAY=4 [YEAR=2025]
 new:
 	@CLASS=Year$(YEAR)Day$(DAY)Challenge; \
-	FILE=src/Challenges/$$CLASS.php; \
+	DIR=src/Challenges/Year$(YEAR); \
+	FILE=$$DIR/$$CLASS.php; \
 	DATA_DIR=src/Challenges/data/$(YEAR); \
+	TEMPLATE=$$DIR/Year$(YEAR)DayXChallenge.php; \
 	if [ -f $$FILE ]; then echo "Ya existe: $$FILE"; exit 1; fi; \
-	sed "s/Year2025DayXChallenge/$$CLASS/g" src/Challenges/Year2025DayXChallenge.php > $$FILE; \
-	mkdir -p $$DATA_DIR; \
+	mkdir -p $$DIR $$DATA_DIR; \
+	sed "s/Year$(YEAR)DayXChallenge/$$CLASS/g" $$TEMPLATE > $$FILE; \
 	touch $$DATA_DIR/day$(DAY)H1T0.txt $$DATA_DIR/day$(DAY)H1T1.txt \
 	      $$DATA_DIR/day$(DAY)H2T0.txt $$DATA_DIR/day$(DAY)H2T1.txt; \
 	echo "Creado: $$FILE"; \

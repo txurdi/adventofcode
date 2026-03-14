@@ -21,14 +21,23 @@ This is a Symfony 7.3 / PHP 8.4 app for solving Advent of Code puzzles.
 
 ### Adding a New Challenge
 
-1. Create `src/Challenges/Year{YEAR}Day{DAY}Challenge.php` extending `YearDayChallenge`
-2. Add data files at `src/Challenges/data/{YEAR}/day{DAY}H{HALF}T{TEST}.txt`
+```bash
+make new DAY=4 YEAR=2025
+```
 
-The `ChallengeFactory` auto-discovers classes by the naming convention `Year{year}Day{day}Challenge`.
+Esto crea `src/Challenges/{YEAR}/Year{YEAR}Day{DAY}Challenge.php` y los ficheros de datos vacíos.
+
+Los challenges se organizan por año: `src/Challenges/Year2025/`, `src/Challenges/Year2026/`, etc.
+El namespace sigue la misma estructura: `App\Challenges\Year2025`, `App\Challenges\Year2026`, etc.
+`ChallengeFactory` auto-descubre las clases con el patrón `App\Challenges\Year{year}\Year{year}Day{day}Challenge`.
 
 ### Challenge Class Structure
 
 ```php
+namespace App\Challenges\Year2025;
+
+use App\Challenges\YearDayChallenge;
+
 class Year2025DayXChallenge extends YearDayChallenge
 {
     // Default format is DATA_FORMAT_LINES. Override only if needed:

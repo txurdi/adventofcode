@@ -12,7 +12,7 @@ class ChallengeFactory
      */
     public function createChallenge(string $year, string $day, string $path, ?bool $debug = false): ChallengeInterface
     {
-        $challengeClass = "App\\Challenges\\Year{$year}Day{$day}Challenge";
+        $challengeClass = "App\\Challenges\\Year{$year}\\Year{$year}Day{$day}Challenge";
 
         if (!class_exists($challengeClass)) {
             // Manejo de error si la combinación no existe
