@@ -6,20 +6,7 @@ use App\util\fileDataHelper;
 
 class Year2025Day2Challenge extends YearDayChallenge
 {
-    public function __construct(
-        private readonly int $year,
-        private readonly int $day,
-        private readonly string $projectDir,
-        private readonly bool $debug
-    )
-    {
-        parent::__construct($year, $day, $projectDir, $debug);
-    }
-
-    public function execute(string $half, ?string $test='1', ?string $format=fileDataHelper::DATA_FORMAT_STRING): string
-    {
-        return parent::execute($half, $test, fileDataHelper::DATA_FORMAT_STRING);
-    }
+    protected string $format = fileDataHelper::DATA_FORMAT_STRING;
 
     protected function executePart1(): void
     {
