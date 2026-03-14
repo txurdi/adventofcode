@@ -1,8 +1,9 @@
-YEAR  ?= 2025
-DAY   ?= 1
-HALF  ?= 1
-TEST  ?= 1
-DEBUG ?= false
+YEAR    ?= 2025
+DAY     ?= 1
+HALF    ?= 1
+TEST    ?= 1
+DEBUG   ?= false
+DOCKER  := docker compose exec php
 
 ## Muestra esta ayuda
 help:
@@ -12,15 +13,15 @@ help:
 
 ## Ejecutar un reto:          make run DAY=3 HALF=1 [TEST=1] [DEBUG=false]
 run:
-	php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) $(TEST) $(DEBUG)
+	$(DOCKER) php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) $(TEST) $(DEBUG)
 
 ## Ejecutar con datos ejemplo: make example DAY=3 HALF=1  (usa TEST=0)
 example:
-	php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) 0 $(DEBUG)
+	$(DOCKER) php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) 0 $(DEBUG)
 
 ## Ejecutar con debug:         make debug DAY=3 HALF=1
 debug:
-	php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) $(TEST) true
+	$(DOCKER) php bin/console txurdi:challenge-launch $(YEAR) $(DAY) $(HALF) $(TEST) true
 
 ## Crear fichero para un nuevo reto: make new DAY=4 [YEAR=2025]
 new:
